@@ -60,6 +60,11 @@ class BrowserManagementKeywords(LibraryComponent):
             self.debug('Closing browser with session '
                        'id {}'.format(self.browsers.current.session_id))
             self.browsers.close()
+    @keyword
+    def get_console_log(self):
+        """Returns the log in browser console."""
+        time.sleep(2)
+        return self._cache.get_con_log()
 
     @keyword
     def open_browser(
@@ -587,8 +592,10 @@ class BrowserManagementKeywords(LibraryComponent):
                 webdriver.DesiredCapabilities.INTERNETEXPLORER, remote, desired_capabilities)
 
     def _make_chrome(self, remote, desired_capabilities, profile_dir):
+        desired_cap = webdriver.DesiredCapabilities.CHROME
+        desired_cap['loggingPrefs'] = { 'browser':'INFO' }
         return self._generic_make_browser(webdriver.Chrome,
-                webdriver.DesiredCapabilities.CHROME, remote, desired_capabilities)
+                desired_cap, remote, desired_capabilities)
 
     def _make_opera(self, remote, desired_capabilities, profile_dir):
         return self._generic_make_browser(webdriver.Opera,
