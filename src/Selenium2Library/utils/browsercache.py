@@ -10,6 +10,10 @@ class BrowserCache(ConnectionCache):
     @property
     def browsers(self):
         return self._connections
+        
+    def get_con_log(self):
+        browser = self.current
+        return browser.get_log('browser')
 
     def get_open_browsers(self):
         open_browsers = []
