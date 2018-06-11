@@ -1,11 +1,31 @@
 Release Notes
 =============
 
-1.8.1
+3.2.0
+-----
+- Added message param to keywords `Location Should Be` and `Location Should Contain` to display custom error message [taniabhullar]
+- Added `Element Attribute Value Should Be` verifies element identified by locator contains expected attribute value.. [brian-mathews]
+
+3.1.1
+-----
+- Added `Element Text Should Not Be` to check a element text is not the argument, you can ignore case with `ignore_case=True` [rubygeek]
+
+3.1.0
+-----
+- Added a message param to `Title Should Be` to display custom error message [rubygeek]
+- Compare text regardless of case in: `Element Should Contain`, `Element Should Not Contain` and `Element Text Should Be` by passing `ignore_case=True`. The default is `False` [rubygeek]
+
+3.0.1
+-----
+- Hotfix release to for issue #1008.
+
+3.0.0
 -----
 - Added 'Get Locations' keyword [thaffenden]
 - Fix getting window information and switching windows on browsers that do not
   support javascript
+- Added 'Get Cookie' keyword [wappowers]
+- Added 'expiry' as value that can be set with 'Add Cookie' keyword [wappowers]
 
 1.8.0
 -----

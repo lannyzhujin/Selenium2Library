@@ -1,42 +1,43 @@
 #!/usr/bin/env python
 
+import re
 from os.path import abspath, dirname, join
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 CURDIR = dirname(abspath(__file__))
 
-with open(join(CURDIR, 'src', 'Selenium2Library', 'version.py')) as f:
-    exec(f.read())
-
-DESCRIPTION = """
-Selenium2Library is a web testing library for Robot Framework
-that leverages the Selenium 2 (WebDriver) libraries.
-"""[1:-1]
-
+CLASSIFIERS = '''
+Development Status :: 5 - Production/Stable
+License :: OSI Approved :: Apache Software License
+Operating System :: OS Independent
+Programming Language :: Python
+Programming Language :: Python :: 2
+Programming Language :: Python :: 3
+Topic :: Software Development :: Testing
+Framework :: Robot Framework
+Framework :: Robot Framework :: Library
+'''.strip().splitlines()
+with open(join(CURDIR, 'src', 'SeleniumLibrary', '__init__.py')) as f:
+    VERSION = re.search("\n__version__ = '(.*)'", f.read()).group(1)
+with open(join(CURDIR, 'README.rst')) as f:
+    DESCRIPTION = f.read()
 with open(join(CURDIR, 'requirements.txt')) as f:
     REQUIREMENTS = f.read().splitlines()
 
-setup(name         = 'robotframework-selenium2library',
-      version      = VERSION,
-      description  = 'Web testing library for Robot Framework',
-      long_description = DESCRIPTION,
-      author       = 'Ryan Tomac , Ed Manlove , Jeremy Johnson',
-      author_email = '<ryan@tomacfamily.com> ,  <devPyPlTw@verizon.net> ,  <jeremy@softworks.com.my>',
-      url          = 'https://github.com/robotframework/Selenium2Library',
-      license      = 'Apache License 2.0',
-      keywords     = 'robotframework testing testautomation selenium selenium2 webdriver web',
-      platforms    = 'any',
-      classifiers  = [
-                        "Development Status :: 5 - Production/Stable",
-                        "License :: OSI Approved :: Apache Software License",
-                        "Operating System :: OS Independent",
-                        "Programming Language :: Python",
-                        "Topic :: Software Development :: Testing"
-                     ],
-      install_requires = REQUIREMENTS,
-      package_dir  = {'' : 'src'},
-      packages     = ['Selenium2Library','Selenium2Library.keywords','Selenium2Library.locators',
-                      'Selenium2Library.utils'],
-      include_package_data = True,
-      )
+setup(
+    name             = 'robotframework-seleniumlibrary',
+    version          = VERSION,
+    description      = 'Web testing library for Robot Framework',
+    long_description = DESCRIPTION,
+    author           = 'Tatu Aalto',
+    author_email     = 'aalto.tatu@gmail.com',
+    url              = 'https://github.com/robotframework/SeleniumLibrary',
+    license          = 'Apache License 2.0',
+    keywords         = 'robotframework testing testautomation selenium webdriver web',
+    platforms        = 'any',
+    classifiers      = CLASSIFIERS,
+    install_requires = REQUIREMENTS,
+    package_dir      = {'': 'src'},
+    packages         = find_packages('src')
+)

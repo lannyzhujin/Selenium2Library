@@ -1,9 +1,10 @@
 .project
 .pydevproject
 .idea
-test/results
+atest/results
 *.pyc
 *.orig
+*py.class
 MANIFEST
 *.egg-info
 *.egg
