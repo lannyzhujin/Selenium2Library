@@ -308,7 +308,7 @@ class SeleniumLibrary(DynamicCore):
 
     def __init__(self, timeout=5.0, implicit_wait=0.0,
                  run_on_failure='Capture Page Screenshot',
-                 screenshot_root_directory=None):
+                 screenshot_root_directory=None, demo=False):
         """SeleniumLibrary can be imported with several optional arguments.
 
         - ``timeout``:
@@ -320,6 +320,9 @@ class SeleniumLibrary(DynamicCore):
         - ``screenshot_root_directory``:
           Location where possible screenshots are created. If not given,
           the directory where the log file is written is used.
+        - ``Demo``
+          Flash the element before click, input and etc actions. Set value
+          True if you want it.
         """
         self.timeout = timestr_to_secs(timeout)
         self.implicit_wait = timestr_to_secs(implicit_wait)
@@ -328,6 +331,7 @@ class SeleniumLibrary(DynamicCore):
             = RunOnFailureKeywords.resolve_keyword(run_on_failure)
         self._running_on_failure_keyword = False
         self.screenshot_root_directory = screenshot_root_directory
+        self.demo = demo
         libraries = [
             AlertKeywords(self),
             BrowserManagementKeywords(self),

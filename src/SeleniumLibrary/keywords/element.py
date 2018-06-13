@@ -481,6 +481,7 @@ class ElementKeywords(LibraryComponent):
         syntax.
         """
         self.info("Clicking element '%s'." % locator)
+        self.flash_element(locator)
         self.find_element(locator).click()
 
     @keyword

@@ -232,6 +232,7 @@ class FormElementKeywords(LibraryComponent):
         INFO if password should not be logged in any format.
         """
         self.info("Typing password into text field '%s'." % locator)
+        self.flash_element(locator)
         self._input_text_into_text_field(locator, password)
 
     @keyword
@@ -245,6 +246,7 @@ class FormElementKeywords(LibraryComponent):
         syntax.
         """
         self.info("Typing text '%s' into text field '%s'." % (text, locator))
+        self.flash_element(locator)
         self._input_text_into_text_field(locator, text)
 
     @keyword

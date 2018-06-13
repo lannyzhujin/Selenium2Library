@@ -15,7 +15,7 @@
 # limitations under the License.
 
 from SeleniumLibrary.utils import escape_xpath_value
-
+from time import sleep
 
 class ContextAware(object):
 
@@ -76,6 +76,16 @@ class ContextAware(object):
         :rtype: list[selenium.webdriver.remote.webelement.WebElement]
         """
         return self.element_finder.find(locator, tag, False, False, parent)
+
+    def flash_element(self, locator, tag=None, required=True, parent=None):
+        """ Flash and highlight element to users"""
+        if self.ctx.demo == False : return
+        elem = self.element_finder.find(locator, tag, True, required, parent)
+        for i in range (0, 2):
+            self.driver.execute_script("arguments[0].style.border='3px solid orange'", elem)
+            sleep(0.1)
+            self.driver.execute_script("arguments[0].style.border='3px solid white'", elem)
+            sleep(0.1)
 
     def is_text_present(self, text):
         locator = "xpath://*[contains(., %s)]" % escape_xpath_value(text)
